@@ -1,16 +1,16 @@
 import React, {Component}  from 'react'
 
 
-class Auth extends Component {
+class Post extends Component {
 
 
     render() {
         return(
             <div>
-                Auth
+                Post
             </div>
         )
     }
 }
 
-export default Auth
+export default Post
