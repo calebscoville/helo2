@@ -64,33 +64,7 @@ class RegisterForm extends React.Component {
                 {/* <FormContainer style={{ width: '115px', height: '150px', margin: 20, padding: '10px' }}> */}
                 <form onSubmit={this.handleUserRegister}>
                     <ul>
-                        <li>
-                    <input
-                        type='text'
-                        placeholder='first name'
-                        name='firstname'
-                        value={this.state.firstname}
-                        onChange={this.handleRegisterInfoUpdate}
-                    />
-                        </li>
-                        <li>
-                    <input
-                        type='text'
-                        placeholder='last name'
-                        name='lastname'
-                        value={this.state.lastname}
-                        onChange={this.handleRegisterInfoUpdate}
-                    />
-                        </li>
-                        <li>
-                    <input
-                        type='text'
-                        placeholder='email'
-                        name='email'
-                        value={this.state.email}
-                        onChange={this.handleRegisterInfoUpdate}
-                    />
-                        </li>
+                        
                         <li>
                     <input
                         type='text'
@@ -109,15 +83,7 @@ class RegisterForm extends React.Component {
                         onChange={this.handleRegisterInfoUpdate}
                     />
                         </li>
-                        <li>
-                    <input
-                        type='text'
-                        placeholder='city'
-                        name='city'
-                        value={this.state.city}
-                        onChange={this.handleRegisterInfoUpdate}
-                    />
-                        </li>
+                    
                         <li>
                         <input
                         type='text'

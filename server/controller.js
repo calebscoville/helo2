@@ -2,24 +2,20 @@
 
 module.exports = {
     register: async (req, res) => {
-        const {image, firstname, lastname, email, username, password, city} = req.body
+        const {image, username, password} = req.body
         const db = req.app.get('db')
         const {session} = req
-        const userFound = await db.check_user_email({ email })
-        if(userFound[0]) return res.status(409).send('Email already exists')
+        // const userFound = await db.check_user_email({ email })
+        // if(userFound[0]) return res.status(409).send('Email already exists')
         const salt = bcrypt.genSaltSync(10)
         const hash = bcrypt.hashSync(password, salt)
         const createdUser = await db.register_user({
             image,
-            firstname,
-            lastname,
-            email,
             username,
             password: hash,
-            city
         })
 
-        session.user = {user_id: createdUser[0].user_id, username: createdUser[0].username, image: createdUser[0].image, first_name: createdUser[0].first_name, last_name: createdUser[0].last_name, email: createdUser[0].email, city: createdUser[0].city}
+        session.user = {user_id: createdUser[0].user_id, username: createdUser[0].username, image: createdUser[0].image}
         res.status(200).send(session.user)
     },
 
@@ -28,10 +24,10 @@ module.exports = {
         const db = req.app.get('db')
         const { session } = req
         const userFound = await db.check_username({username})
-        if(!userFound[0]) return res.status(401).send('Email does not exist')
+        if(!userFound[0]) return res.status(401).send('Username does not exist')
         const authenticated = bcrypt.compareSync(password, userFound[0].password)
         if (authenticated) {
-            session.user = {user_id: userFound[0].user_id, username: userFound[0].username, image: userFound[0].image, first_name: userFound[0].first_name, last_name: userFound[0].last_name, email: userFound[0].email, city: userFound[0].city}
+            session.user = {user_id: userFound[0].user_id, username: userFound[0].username, image: userFound[0].image}
             res.status(200).send(session.user)
         } else {
             return res.status(401).send('Incorrect username or password')
