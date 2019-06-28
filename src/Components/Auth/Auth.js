@@ -7,9 +7,9 @@ class Auth extends Component {
     componentDidMount() {
         axios.get('/ctrl/user').then((res) => {
             this.props.updateUser(res.data)
-            this.props.history.push('/details')
+            this.props.history.push('/dashboard')
         })
-        this.props.id && this.props.history.push('/details')
+        this.props.id && this.props.history.push('/dashboard')
     }
 
     constructor() {
@@ -29,10 +29,10 @@ class Auth extends Component {
         e.preventDefault()
         const { username, password } = this.state
         axios
-            .post('/auth/login', { username, password})
+            .post('/ctrl/login', { username, password})
             .then((res) => {
                 this.props.updateUser(res.data)
-                this.props.history.push('/patrondash')
+                this.props.history.push('/dashboard')
             })
         e.target.username.value = ''
         e.target.password.value = ''

@@ -16,27 +16,23 @@ import {Link} from 'react-router-dom'
 //     FormBtn
 //   } from '../AppStylesMany';
 
-class RegisterForm extends React.Component {
+class RegisterForm extends Component {
     constructor() {
         super()
         this.state = {
             username: '',
             password: '',
-            firstname: '',
-            lastname: '',
-            email: '',
-            city: '',
             image: '',
         }
     }
     handleUserRegister = async (e) => {
         e.preventDefault()
-        const { firstname, lastname, email, username, password, city, image } = this.state
+        const { username, password, image } = this.state
         await axios
-            .post('/ctrl/register', { firstname, lastname, email, username, password, city, image })
+            .post('/ctrl/register', { username, password, image })
             .then((res) => {
                 this.props.updateUser(res.data)
-                // this.props.history.push('/patrondash')
+                this.props.history.push('/dashboard')
             })
             .catch((err) => {
                 console.log(err)
@@ -45,10 +41,6 @@ class RegisterForm extends React.Component {
         this.setState({
             username: '',
             password: '',
-            firstname: '',
-            lastname: '',
-            email: '',
-            city: '',
             image: ''
         })
     }
@@ -60,6 +52,8 @@ class RegisterForm extends React.Component {
     }
     render() {
         return (
+            <div>
+                Register
             <>
                 {/* <FormContainer style={{ width: '115px', height: '150px', margin: 20, padding: '10px' }}> */}
                 <form onSubmit={this.handleUserRegister}>
@@ -100,6 +94,7 @@ class RegisterForm extends React.Component {
                 </form>
                 {/* </FormContainer> */}
             </>
+            </div>
         )
     }
 }
